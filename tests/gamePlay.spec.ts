@@ -48,7 +48,7 @@ test.describe('Gameplay', () => {
 
         await gamePage.clickCell(0, 0);
         await gamePage.diffSelect.click()
-        await page.locator('select').last().click()
+        await gamePage.diffSelect.selectOption("Hard")
 
     });
 

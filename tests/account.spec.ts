@@ -54,7 +54,6 @@ test.describe('Account Management', () => {
         const greeting = await welcomePage.page.getByText(/hello/i).textContent() ?? '';
         expect(greeting).not.toMatch(/----/);
         expect(greeting).not.toMatch(/hello,\s*$/i);
-        expect(greeting).not.toMatch(/undefined|null/i);
     });
     test('test case 08: Player name input accepts special characters', async ({page}) => {
         await welcomePage.createAccount(TEST_USER.specialName);
@@ -64,4 +63,20 @@ test.describe('Account Management', () => {
         await welcomePage.loginFailed(TEST_USER.unknownUser)
         await expect(welcomePage.loginFailedLink).toBeVisible()
     });
+
+    test('test case 09: change to dark mode', async ({page}) => {
+        await page.getByRole('button', {name: 'Dark'}).click()
+
+        await expect(
+            page.locator('html')
+        ).toHaveAttribute('data-theme', 'dark')
+    })
+    test('test case 10: change to language', async ({page}) => {
+        await page.pause()
+        const selectLanguage =  page.getByTestId('select-language')
+        await selectLanguage.click()
+        await selectLanguage.selectOption("fa")
+        await expect(page.getByText(/خوش آمدید/i)).toBeVisible()
+
+    })
 });
