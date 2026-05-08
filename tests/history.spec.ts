@@ -3,6 +3,7 @@ import { test, expect } from '../fixtures';
 test.describe('Game History', () => {
 
     test('test case 01: History page displays correct heading', async ({ loggedInGame: { gamePage }, historyPage }) => {
+        await historyPage.goto();
         await expect(historyPage.historyHeading).toBeVisible();
     });
 

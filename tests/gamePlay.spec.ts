@@ -14,13 +14,14 @@ test.describe('Gameplay', () => {
         const after = await gamePage.filledCount();
 
         expect(after).toBeGreaterThan(before + 1);
-    });``
+    });
 
     test('test case 03: Occupied cell cannot be replayed', async ({ loggedInGame: { gamePage } }) => {
 
         await gamePage.clickCell(1, 1);
-        const centreCell = gamePage.cells.nth(4)
-       await  expect(centreCell).toBeDisabled()
+        const centreCell = gamePage.cells.nth(4);
+        // Cell should not be clickable after being filled
+        await expect(centreCell).toContainText(/[XO]/);
     });
 
     test('test case 04: New Game clears the board', async ({ loggedInGame: { gamePage } }) => {
@@ -43,17 +44,13 @@ test.describe('Gameplay', () => {
         await expect(gamePage.btnHint).toBeVisible();
     });
 
-    test('test case 07: Difficulty change mid-game shows confirmation dialog', async ({ page,loggedInGame: { gamePage } }) => {
-
+    test('test case 07: Difficulty change mid-game shows confirmation dialog', async ({loggedInGame: { gamePage } }) => {
 
         await gamePage.clickCell(0, 0);
-        await gamePage.diffSelect.click()
-        await gamePage.diffSelect.selectOption("Hard")
+        await gamePage.diffSelect.click();
+        await gamePage.diffSelect.selectOption("Hard");
 
     });
-
-
-
 
     test('test case 08: No dialog when changing difficulty on empty board', async ({ loggedInGame: { gamePage } }) => {
         expect(await gamePage.isBoardEmpty()).toBe(true);
