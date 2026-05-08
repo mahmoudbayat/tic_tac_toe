@@ -12,6 +12,7 @@ export class WelcomePage extends BasePage {
     get loginBtn()         { return this.page.getByRole('button', { name: /log in|sign in/i }); }
     get createAccountButton()       {return this.page.getByRole("button", { name: "Create Account" })}
     get duplicateAccount()          {return this.page.getByText('This name is already taken. Try logging in.')}
+    get loginFailedLink()                   {return this.page.getByText('No account with this name. Please register.')}
     // ── Actions ───────────────────────────────────────────────────────────────
     async goto(): Promise<void> {
         await this.page.goto('index.html');
@@ -34,5 +35,11 @@ export class WelcomePage extends BasePage {
     // ── Assertions ────────────────────────────────────────────────────────────
     async assertVisible(): Promise<void> {
         await expect(this.heading).toBeVisible();
+    }
+
+    async loginFailed(name: string): Promise<void> {
+        await this.loginLink.click();
+        await this.nameInput.fill(name);
+        await this.loginBtn.click();
     }
 }

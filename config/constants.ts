@@ -1,7 +1,8 @@
 export const TEST_USER = {
     name :  'TEST_USER',
     updatedName : 'TEST_UPDATED_NAME',
-    specialName : '123TEST'
+    specialName : '123TEST',
+    unknownUser: 'TEST'
 }as const
 export const TIMEOUTS = {
     short:     2_000,

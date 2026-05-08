@@ -60,4 +60,8 @@ test.describe('Account Management', () => {
         await welcomePage.createAccount(TEST_USER.specialName);
         await expect(page.getByText(`Hello, ${TEST_USER.specialName}`)).toBeVisible({ timeout: 8000 })
     });
+    test('test case 09: "Account does not exist', async ({page}) => {
+        await welcomePage.loginFailed(TEST_USER.unknownUser)
+        await expect(welcomePage.loginFailedLink).toBeVisible()
+    });
 });
