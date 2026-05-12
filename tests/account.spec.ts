@@ -23,7 +23,7 @@ test.describe('Account Management', () => {
     });
 
     test('test case 03: Create Account button is clickable', async ({ }) => {
-        await expect(welcomePage.createAccountButton).toBeEnabled();
+        await expect(welcomePage.createAccountBtn).toBeEnabled();
     });
 
     test('test case 04: "Already have an account" link is visible', async ({ page }) => {
